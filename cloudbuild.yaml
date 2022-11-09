@@ -79,7 +79,7 @@ steps:
       cat kustomization.yaml && \
       cp kustomization.yaml config-source/overlays/dev && \
       git add config-source/overlays/dev/kustomization.yaml && \
-      git commit -m "Deploying image gcr.io/$PROJECT_ID/frontend:${COMMIT_SHA} && \
+      git commit -m "Deploying image gcr.io/$PROJECT_ID/frontend:${COMMIT_SHA}"" && \
       git push -u -f origin main
     secretEnv: ['GITHUB_EMAIL', 'GITHUB_USERNAME', 'GITHUB_TOKEN']
 availableSecrets:
