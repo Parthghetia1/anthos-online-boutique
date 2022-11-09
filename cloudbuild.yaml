@@ -61,14 +61,6 @@ steps:
       gcloud container images describe gcr.io/$PROJECT_ID/frontend:latest \
       --format 'value(image_summary.digest)' > ./checksum.txt | echo ./checksum.txt
   # This step generates the new manifest
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    id: generate-manifest
-    entrypoint: /bin/bash
-    args:
-    - '-c'
-    - |
-       sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" frontend.yaml.tpl | \
-       sed "s/COMMIT_SHA/$(cat ./checksum.txt)/g" > config-source/overlays/dev/kustomization.yaml
   
   # This step pushes the manifest back to hello-cloudbuild-env
   - name: 'gcr.io/cloud-builders/gcloud'
