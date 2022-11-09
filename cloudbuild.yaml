@@ -71,13 +71,13 @@ steps:
     - |
       set -x && \
       git clone https://github.com/$$GITHUB_USERNAME/config-source && \
-      cd config-source/overlays/dev && \
+      sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" frontend.yaml.tpl | \
+      sed "s/COMMIT_SHA/$(cat ./checksum.txt)/g" > kustomization.yaml && \
+      cp kustomization.yaml config-source/overlays/dev && \
       git config --global user.email $$GITHUB_EMAIL && \
       git config --global user.name $$GITHUB_USERNAME && \
       git remote set-url origin https://$$GITHUB_USERNAME:$$GITHUB_TOKEN@github.com/$$GITHUB_USERNAME/config-dev.git && \
-      sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" frontend.yaml.tpl | \
-      sed "s/COMMIT_SHA/$(cat ./checksum.txt)/g" > kustomization.yaml && \
-      git add kustomization.yaml && \
+      git add config-source/overlays/dev/kustomization.yaml && \
       git commit -m "Deploying image gcr.io/$PROJECT_ID/frontend:${COMMIT_SHA}
       Built from commit ${COMMIT_SHA} of repository frontend-app
       Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
