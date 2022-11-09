@@ -63,14 +63,17 @@ steps:
   # This step generates the new manifest
   
   # This step pushes the manifest back to hello-cloudbuild-env
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: 'gcr.io/google-samples/cloudbuild-kustomize:latest'
     id: push-manifest
-    entrypoint: /bin/sh
+    entrypoint: 'bash'
     args:
+    - '-eEuo'
+    - 'pipefail'
     - '-c'
-    - |
-      set -x && \
+    - |-
       git clone https://github.com/$$GITHUB_USERNAME/config-source && \
+      git config --global user.email $$GITHUB_EMAIL && \
+      git config --global user.name $$GITHUB_USERNAME && \
       sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" frontend.yaml.tpl | \
       sed "s/COMMIT_SHA/$(cat ./checksum.txt)/g" > kustomization.yaml && \
       cat kustomization.yaml && \
