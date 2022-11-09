@@ -65,7 +65,6 @@ steps:
       git config --global user.email $$GITHUB_EMAIL
       git config --global user.name $$GITHUB_USERNAME 
       git remote set-url origin https://$$GITHUB_USERNAME:$$GITHUB_TOKEN@github.com/$$GITHUB_USERNAME/config-dev.git
-      cd overlays/dev
     secretEnv: ['GITHUB_EMAIL', 'GITHUB_USERNAME', 'GITHUB_TOKEN']
   - id: 'get-image-checksum'
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -93,7 +92,8 @@ steps:
     - '-c'
     - |
       set -x && \
-      git add kustomization.yaml && \
+      cd overlays/dev && \
+      git add ./overlays/dev && \
       git commit -m "Deploying image gcr.io/$PROJECT_ID/frontend:${COMMIT_SHA}
       Built from commit ${COMMIT_SHA} of repository frontend-app
       Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
