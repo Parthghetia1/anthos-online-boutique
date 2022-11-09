@@ -62,8 +62,8 @@ steps:
     - |-
       git clone https://github.com/$$GITHUB_USERNAME/config-source && \
       cd config-source
-      git config user.email $$GITHUB_EMAIL
-      git config user.name $$GITHUB_USERNAME 
+      git config --global user.email $$GITHUB_EMAIL
+      git config --global user.name $$GITHUB_USERNAME 
       git remote set-url origin https://$$GITHUB_USERNAME:$$GITHUB_TOKEN@github.com/$$GITHUB_USERNAME/config-dev.git
       cd overlays/dev
     secretEnv: ['GITHUB_EMAIL', 'GITHUB_USERNAME', 'GITHUB_TOKEN']
