@@ -72,13 +72,13 @@ steps:
     - '-c'
     - |-
       git clone https://github.com/$$GITHUB_USERNAME/config-source && \
-      git config --global user.email $$GITHUB_EMAIL && \
-      git config --global user.name $$GITHUB_USERNAME && \
       sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" frontend.yaml.tpl | \
       sed "s/COMMIT_SHA/$(cat ./checksum.txt)/g" > kustomization.yaml && \
       cat kustomization.yaml && \
       cp kustomization.yaml config-source/overlays/dev && \
       cd config-source/overlays/dev
+      git config --global user.email $$GITHUB_EMAIL && \
+      git config --global user.name $$GITHUB_USERNAME && \
       git add kustomization.yaml && \
       git commit -m "Deploying image gcr.io/$PROJECT_ID/frontend:${COMMIT_SHA}" && \
       git push -u origin main
