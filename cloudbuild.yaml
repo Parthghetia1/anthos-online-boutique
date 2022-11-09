@@ -72,17 +72,19 @@ steps:
     - '-c'
     - |-
       git clone https://github.com/$$GITHUB_USERNAME/config-source
-      cd config-source/overlays/dev
-      git config user.email $$GITHUB_EMAIL
-      git config user.name $$GITHUB_USERNAME
-      git remote set-url origin https://$$GITHUB_USERNAME:$$GITHUB_TOKEN@github.com/$$GITHUB_USERNAME/config-source.git
-
       sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" frontend.yaml.tpl | \
       sed "s/COMMIT_SHA/$(cat ./checksum.txt)/g" > kustomization.yaml
       cat kustomization.yaml
 
 
       cp kustomization.yaml config-source/overlays/dev
+      
+      cd config-source/overlays/dev
+      git config user.email $$GITHUB_EMAIL
+      git config user.name $$GITHUB_USERNAME
+      git remote set-url origin https://$$GITHUB_USERNAME:$$GITHUB_TOKEN@github.com/$$GITHUB_USERNAME/config-source.git
+
+      
       
       
       git add kustomization.yaml && \
