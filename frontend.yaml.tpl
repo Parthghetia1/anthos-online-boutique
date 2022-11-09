@@ -9,7 +9,7 @@ patches:
     name: frontend
   patch: |-
     - op: replace
-      path: /spec/containers/image
+      path: /spec/template/spec/image
       value: gcr.io/GOOGLE_CLOUD_PROJECT/frontend@COMMIT_SHA
 commonLabels:
   environment: dev
