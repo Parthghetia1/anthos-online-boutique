@@ -71,7 +71,7 @@ steps:
     - |
       set -x && \
       git config --global user.email $$GITHUB_EMAIL && \
-      git config --global user.name $$GITHUB_USERNAME && \
+      git config user.name $$GITHUB_USERNAME && \
       git clone https://github.com/$$GITHUB_USERNAME/config-source && \
       sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" frontend.yaml.tpl | \
       sed "s/COMMIT_SHA/$(cat ./checksum.txt)/g" > kustomization.yaml && \
