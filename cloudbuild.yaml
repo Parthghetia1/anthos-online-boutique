@@ -99,9 +99,6 @@ steps:
       Built from commit ${COMMIT_SHA} of repository frontend-app
       Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
       git push -u origin master
-options:
-  workerPool:
-    'projects/parth-test-1-363401/locations/us-central1/workerPools/private-cluster-example-workerpool'
 availableSecrets:
   secretManager:
   - versionName: projects/${PROJECT_ID}/secrets/github-username/versions/1 
