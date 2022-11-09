@@ -92,7 +92,7 @@ steps:
     - '-c'
     - |
       set -x && \
-      git add /overlays/dev/kustomization.yaml && \
+      git add kustomization.yaml && \
       git commit -m "Deploying image gcr.io/$PROJECT_ID/frontend:${COMMIT_SHA}
       Built from commit ${COMMIT_SHA} of repository frontend-app
       Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
