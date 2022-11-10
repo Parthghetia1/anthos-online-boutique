@@ -4,7 +4,7 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/frontend:latest'
+      - 'gcr.io/dev-anthos-wet/frontend:latest'
       - '.'
   # - id: 'scan'
   #   name: gcr.io/google.com/cloudsdktool/cloud-sdk
