@@ -4,7 +4,7 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/dev-anthos-wet/frontend:latest'
+      - 'gcr.io/$PROJECT_ID/frontend:latest'
       - '.'
   # - id: 'scan'
   #   name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -27,7 +27,7 @@ steps:
     name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/dev-anthos-wet/frontend:latest'
+      - 'gcr.io/$PROJECT_ID/frontend:latest'
 
   # - id: 'build-attestation-image'
   #   name: 'gcr.io/cloud-builders/docker'
